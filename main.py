@@ -1,47 +1,26 @@
-#imports
+import function
 import sys
+file = open("bowlernames.txt", "w+")
 
-#Make the main class
-
-class Bowler:
-    #Initialize
-    def __init__(self, lanecount):
-        try:
-            self.lanecount = int(lanecount)
-        except:
-            print("Error, lanecount must be an integer")
-            sys.exit()
-        if self.lanecount<1:
-            print("Must have at least 1 lane")
-            sys.exit()
-                    
-        bowlerfile = open("bowlernames.txt", "r")
-        self.bowlers = []
-        self.bowlercount = 0
-        self.lanes = []
-        for i in bowlerfile.readlines():
-            if i.endswith("\n"):
-                string = i.rsplit("\n")
-                string = string[0]
-            else:
-                string = i
-            self.bowlers.append(string)
-            self.bowlercount += 1
-        
-    def createLanes(self):
-        #Add the first lane
-        self.lanes.append(self.bowlers)
-        #check if its odd or even
-        for i in range(1, self.lanecount):
-            currentlane = []
-            if self.bowlercount%self.lanecount == 0:
-                offset = self.bowlercount/self.lanecount
-                offset = int(offset)
-                currentlane = self.bowlers[offset::] + self.bowlers[:offset:]
-                self.bowlers = currentlane
-            self.lanes.append(currentlane)
-        return self.lanes
-
-obj = Bowler(input("How many lanes do you have?\n"))
-
-print(obj.createLanes())
+print("Welcome to BowlOptimize!")
+while True:
+    print("Enter one of the following options: \n1. Reset Bowlers \n2. Add Bowlers \n3.Execute Algorithm")
+    choice = int(input())
+    if choice==1:
+        file.truncate()
+    elif choice==2:
+        end = True
+        while end:
+            name = input("Please enter the name of the new bowler:\n")
+            file.writelines(name)
+            file.writelines("\n")
+            passer = input("Do you have more names? Enter Y for yes or N for no.\n")
+            if passer.lower() == "y":
+                pass
+            elif passer.lower() == "n":
+                end = False
+    elif choice==3:
+        file.close()
+        obj = function.Bowler(input("How many lanes do you have?\n"))
+        print(obj.createLanes())
+        sys.exit()
