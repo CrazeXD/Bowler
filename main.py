@@ -15,9 +15,7 @@ while True:
             file.writelines(name)
             file.writelines("\n")
             passer = input("Do you have more names? Enter Y for yes or N for no.\n")
-            if passer.lower() == "y":
-                pass
-            elif passer.lower() == "n":
+            if passer.lower() == "n":
                 end = False
     elif choice==3:
         file.close()
