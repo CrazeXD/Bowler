@@ -1,2 +1,3 @@
 # Bowler
-Optimize having 2 lanes for bowling!
+## Optimize having multiple lanes for bowling!
+
